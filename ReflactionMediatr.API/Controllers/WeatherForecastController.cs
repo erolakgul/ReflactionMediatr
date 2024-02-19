@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using ReflactionMediatr.API.Models.User;
+using ReflactionMediatr.API.User.Queries;
+using ReflactionMediatr.Lib.Interface.Mediator;
 
 namespace ReflactionMediatr.API.Controllers
 {
@@ -12,22 +15,18 @@ namespace ReflactionMediatr.API.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ICustomReflaction _customReflaction;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, ICustomReflaction customReflaction)
         {
             _logger = logger;
+            _customReflaction = customReflaction;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public Task<UserViewModel> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return _customReflaction.Send(new GetUserByIdQuery(10));
         }
     }
 }

@@ -15,4 +15,8 @@
     <ProjectReference Include="..\ReflactionMediatr.Lib\ReflactionMediatr.Lib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
+
 </Project>

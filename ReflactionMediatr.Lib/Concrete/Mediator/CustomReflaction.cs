@@ -11,10 +11,11 @@ namespace ReflactionMediatr.Lib.Concrete.Mediator
             // request  => GetUserByIdQuery 
             // response => UserViewModel
 
-            // istek tip parametresi alınır
+            // istekte bulunulan query bilgisi alınır
             var reqType = request.GetType();
 
             // IRequest tipinde olan nesne alınır
+            // IRequest<TRequest>
             var reqTypeInterface = reqType.GetInterfaces()
                                 .Where(x => x.IsInterface && x.GetGenericTypeDefinition() == typeof(IRequest<>))
                                 .FirstOrDefault();
@@ -22,7 +23,7 @@ namespace ReflactionMediatr.Lib.Concrete.Mediator
             var responseType = reqTypeInterface.GetGenericArguments()[0];
 
             //
-            var genericType = typeof(IRequestHandler<,>).MakeGenericType(responseType, responseType);
+            var genericType = typeof(IRequestHandler<,>).MakeGenericType(reqType, responseType);
 
             // daha önce kaydettiğimiz bir 
             // şu servisi veriyorm, handler ı ver diyoruz

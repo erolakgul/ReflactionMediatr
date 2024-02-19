@@ -29,7 +29,7 @@ namespace ReflactionMediatr.Lib.Extentions
                 //interface i al
                 var handlerInterface = handler
                                         .GetInterfaces()
-                                        //.Where(h => h.)
+                                        //.Where(h => h.GetInterfaces( )
                                         .FirstOrDefault();
 
                 //TRequest, TResponse tiplerinden TRequest ve TResponse u al
