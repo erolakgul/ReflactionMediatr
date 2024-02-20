@@ -7,23 +7,19 @@ namespace ReflactionMediatr.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class HomeController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<HomeController> _logger;
         private readonly ICustomReflaction _customReflaction;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, ICustomReflaction customReflaction)
+        public HomeController(ILogger<HomeController> logger, ICustomReflaction customReflaction)
         {
             _logger = logger;
             _customReflaction = customReflaction;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        [HttpGet(Name = "Get")]
         public Task<UserViewModel> Get()
         {
             return _customReflaction.Send(new GetUserByIdQuery(10));
